@@ -13173,6 +13173,7 @@ a.read_more i {
 }
 
 .nft_coll {
+  width:106%;
   background: #ffffff;
   padding-bottom: 10px;
   border: solid 1px #dddddd;
@@ -13206,11 +13207,36 @@ a.read_more i {
 .nft_wrap {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 200%;
   overflow: hidden;
   border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   -webkit-border-radius: 10px 10px 0 0;
+}
+
+.nft_wrap--skeleton, .nft_coll_pp--skeleton img {
+  background-color: lightgrey;
+}
+
+.nft_coll_info--skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft_coll_info--skeleton h4 {
+  color: lightgrey;
+  background-color: lightgrey;
+  width: 100px;
+}
+
+.nft_coll_info--skeleton span {
+  height:20px;
+  background-color: lightgrey;
+  color: lightgrey;
+  margin:5px auto;  
+
 }
 
 .nft_coll:hover img {
@@ -15055,13 +15081,20 @@ a.btn-slider:hover {
   display: block;
   text-align: center;
   margin-top: 10px;
-  cursor: poInter;
+  cursor: pointer;
 }
 
 .prev-slider i,
 .next-slider i {
   border: solid 1px #ccc;
   padding: 5px 10px 5px 10px;
+}
+
+.next-slick-arrow, .prev-slick-arrow {
+  font-size: 40px;
+  z-index: 10;
+  position: relative;
+  transform: unset;
 }
 
 .prev-slider i:hover,
@@ -16713,4 +16746,41 @@ img {
 
 .no-cursor {
   cursor: not-allowed;
+}
+
+.override-mw {
+  max-width: 100% !important ;
+  left:-5px;
+}
+
+.override-style {
+  position: absolute;
+  top: -30px;
+  border-radius: 30px;
+  border: 1px solid lightgray;
+  height: 45px;
+  width: 45px;
+  padding: 12px;
+  color: black;
+  background-color: white;
+  text-align: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.override-left {
+  left:15px;
+}
+
+.override-right {
+  left:-35px;
+}
+
+.override-style:hover {
+  box-shadow: 5px 5px 30px 0 rgba(0,0,0,.2);
+}
+
+.slider-container .slick-prev, .slider-container .slick-next {
+  transform: unset !important;
 }

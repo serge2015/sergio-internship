@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
+import authorImage from "../../images/author_thumbnail--skeleton.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import axios from 'axios';
 import Slider from 'react-slick';
@@ -15,9 +15,50 @@ const HotCollections = () => {
     dots: false,
     arrows: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 4,
     slidesToScroll: 1,
     infinite: true,
+    nextArrow: (
+      <div>
+        <div className="next-slick-arrow override-style override-right">
+        &#8250;
+        </div>
+      </div>
+    ),
+  
+    prevArrow: (
+      <div>
+        <div className="prev-slick-arrow override-style override-left">
+          &#8249;
+        </div>
+      </div>
+    ),
+    useCSS: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 890,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
   
   async function getHotCollections() {
@@ -44,33 +85,34 @@ useEffect(() => {
             </div>
           </div>
           {isLoading 
-          ? new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          ? <div className="slider-container">
+            <Slider {...settings} >
+          {new Array(4).fill(0).map((_, index) => (
+            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 override-mw" key={index}>
               <div className="nft_coll">
                 <div className="nft_wrap">
-                  <Link to="/item-details">
-                    <img src={nftImage} className="lazy img-fluid" alt="" />
-                  </Link>
+                  <div className="skeleton-box" style={{width:'100%', height:'175px'}}></div>
                 </div>
                 <div className="nft_coll_pp">
-                  <Link to="/author">
-                    <img className="lazy pp-coll" src={AuthorImage} alt="" />
-                  </Link>
-                  <i className="fa fa-check"></i>
+                <div className="skeleton-box" style={{width:'50px', height:'50px', borderRadius:'50%'}}></div>
+                <i className="fa fa-check"></i>
                 </div>
                 <div className="nft_coll_info">
-                  <Link to="/explore">
-                    <h4>Pinky Ocean</h4>
-                  </Link>
-                  <span>ERC-192</span>
+                <div className="skeleton-box" style={{width:'100px', height:'20px'}}></div>
+                <br />
+                <div className="skeleton-box" style={{width:'60px', height:'20px'}}></div>
                 </div>
               </div>
             </div>
-          )):
+          ))}
+          </Slider>
+            </div>
+            : <>
           <div className="slider-container">
-          <Slider {...settings} >
+            <Slider {...settings} >
           {hotCollections.map((item) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.id}>
+            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 override-mw" key={item.id}
+            >
               <div className="nft_coll">
                 <div className="nft_wrap">
                   <Link to="/item-details">
@@ -79,7 +121,7 @@ useEffect(() => {
                 </div>
                 <div className="nft_coll_pp">
                   <Link to="/author">
-                    <img className="lazy pp-coll" src={item.AuthorImage} alt="" />
+                    <img className="lazy pp-coll override-mw" src={item.authorImage} alt="" />
                   </Link>
                   <i className="fa fa-check"></i>
                 </div>
@@ -93,7 +135,8 @@ useEffect(() => {
             </div>
           ))}
           </Slider>
-          </div>}
+          </div>
+          </>}
         </div>
       </div>
     </section>
