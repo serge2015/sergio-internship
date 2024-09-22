@@ -13630,6 +13630,7 @@ a.read_more i {
   -webkit-border-radius: 15px;
   margin-bottom: 25px;
   background: #ffffff;
+  width:105%;
 }
 
 .nft__item.style-2,
@@ -16758,4 +16759,8 @@ img {
 
 .slider-container .slick-prev, .slider-container .slick-next {
   transform: unset !important;
+}
+
+.box {
+  display: inline;
 }
