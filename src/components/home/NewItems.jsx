@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Countdown from "../UI/countdown";
 
-
 const NewItems = () => {
   const [isLoading, setIsLoading] = useState();
   const [newItems, setNewItems] = useState([]);
@@ -137,7 +136,7 @@ const NewItems = () => {
         </Slider>
         </div>
           : 
-          <div className="slider-container">
+          <div className="slider-container" >
             <Slider {...settings} >
           {newItems.map((item) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 override-mw" key={item.id}>
