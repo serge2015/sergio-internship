@@ -5,6 +5,8 @@ import LoadItems from "../UI/loadItems";
 
 const ExploreItems = () => {
   const [isLoading, setIsLoading] = useState();
+  const [loadMore, setLoadMore] = useState(true);
+  const [loadMoreMore, setLoadMoreMore] = useState(true);
   const [exploreItems, setExploreItems] = useState([]);
   const [filter, setFilter] = useState("");
   const startItem = 0;
@@ -87,32 +89,37 @@ const ExploreItems = () => {
         </>
         :
         <>
-          <LoadItems start={ startItem } end={ endItem } exploreItems = { exploreItems } />
+        {loadMore
+          ?
+          <>
+          {loadMoreMore
+            ?
+            <>
+              <LoadItems start={ startItem } end={ endItem } exploreItems = { exploreItems } />
+              <div className="col-md-12 text-center">
+                <button className="btn-main lead" onClick={() => setLoadMoreMore(false)}>
+                  Load more
+                </button>
+              </div>
+            </>
+            :
+            <>
+              <LoadItems start={ startItem } end={ endItem + 4 } exploreItems = { exploreItems } />
+              <div className="col-md-12 text-center">
+                <button className="btn-main lead" onClick={() => setLoadMore(false)}>
+                  Load more
+                </button>
+              </div>
+            </>
+          }
+          </>
+          :
+          <>
+            <LoadItems start={ startItem } end={ endItem + 8 } exploreItems = { exploreItems } />
+          </>
+        }
         </>
       }
-      <div className="col-md-12 text-center">
-        <button id="loadmore" className="btn-main lead" onClick={() =>{
-          document.getElementById("loadmore").style.display = "none";
-          document.getElementById("section2").style.display = "flex";
-          document.getElementById("loadmore2").style.display = "block";
-          }}>
-          Load more
-        </button>
-      </div>
-      <div id="section2" style={{display: "none"}}>
-        <LoadItems start={ startItem + 8 } end={ endItem + 4 } exploreItems = { exploreItems } />
-      </div>
-      <div  id="loadmore2" style={{display: "none"}} className="col-md-12 text-center">
-        <button className="btn-main lead" onClick={() =>{
-          document.getElementById("loadmore2").style.display = "none";
-          document.getElementById("section3").style.display = "flex";
-        }}>
-          Load more
-        </button>
-      </div>
-      <div id="section3" style={{display: "none"}}>
-        <LoadItems start={ startItem + 12 } end={ endItem + 8 } exploreItems = { exploreItems } />
-      </div>
     </>
   );
 };
