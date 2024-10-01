@@ -7,18 +7,15 @@ import axios from "axios";
 const Author = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [author, setAuthor] = useState({});
-  const [numberOfFollowers, setNumberOfFollowers] = useState(0);
+  const [authorData, setAuthorData] = useState({});
   const [isFollowing, setIsFollowing] = useState(false);
   const [action, setAction] = useState("");
 
   function changeFollowers(action) {
     setAction(action);
     if (action === "plus") {
-      setNumberOfFollowers();
       setIsFollowing(true);
     } else {
-      setNumberOfFollowers();
       setIsFollowing(false);
     }
   }
@@ -28,7 +25,7 @@ const Author = () => {
     const { data } = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
     );
-    setAuthor(data);
+    setAuthorData(data);
     setIsLoading(false);
   }
 
@@ -105,14 +102,14 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={author.authorImage} alt="" />
+                      <img src={authorData.authorImage} alt="" />
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
                         <h4>
-                          {author.authorName}
-                          <span className="profile_username">{author.tag}</span>
+                          {authorData.authorName}
+                          <span className="profile_username">{authorData.tag}</span>
                           <span id="wallet" className="profile_wallet">
-                            {author.address}
+                            {authorData.address}
                           </span>
                           <button id="btn_copy" title="Copy Text">
                             Copy
@@ -123,7 +120,7 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{author.followers} followers</div>
+                      <div className="profile_follower">{authorData.followers} followers</div>
                       {isFollowing
                       ?
                       <Link to="#" className="btn-main" onClick={changeFollowers("minus")}>
@@ -140,7 +137,7 @@ const Author = () => {
               </div> 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  {/* <AuthorItems items = { author.nftCollection } authorImage = { author.authorImage } authorId = {author.id}/> */}
+                  <AuthorItems items = { authorData.nftCollection } authorImage = { authorData.authorImage } authorId = {authorData.id}/>
                 </div>
               </div>
               </>
