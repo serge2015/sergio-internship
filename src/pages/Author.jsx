@@ -6,16 +6,20 @@ import axios from "axios";
 
 const Author = () => {
   const { id } = useParams();
+  console.log(id);
   const [isLoading, setIsLoading] = useState(true);
   const [authorData, setAuthorData] = useState({});
   const [isFollowing, setIsFollowing] = useState(false);
+  const [followers, setFollowers] = useState(0);
   const [action, setAction] = useState("");
 
   function changeFollowers(action) {
     setAction(action);
     if (action === "plus") {
+      setFollowers(followers+1);
       setIsFollowing(true);
     } else {
+      setFollowers(followers-1);
       setIsFollowing(false);
     }
   }
@@ -26,6 +30,7 @@ const Author = () => {
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
     );
     setAuthorData(data);
+    setFollowers(data.followers);
     setIsLoading(false);
   }
 
@@ -120,16 +125,16 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{authorData.followers} followers</div>
+                      <div className="profile_follower">{followers} followers</div>
                       {isFollowing
                       ?
-                      <Link to="#" className="btn-main" onClick={changeFollowers("minus")}>
+                      <button className="btn-main" onClick={() => changeFollowers("minus")}>
                         Unfollow
-                      </Link>
+                      </button>
                       :
-                      <Link to="#" className="btn-main" onClick={changeFollowers("plus")}>
+                      <button className="btn-main" onClick={() => changeFollowers("plus")}>
                         Follow
-                      </Link>
+                      </button>
                     }
                     </div>
                   </div>
