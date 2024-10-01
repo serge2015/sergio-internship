@@ -6,7 +6,6 @@ import axios from "axios";
 
 const Author = () => {
   const { id } = useParams();
-  console.log(id);
   const [isLoading, setIsLoading] = useState(true);
   const [authorData, setAuthorData] = useState({});
   const [isFollowing, setIsFollowing] = useState(false);
