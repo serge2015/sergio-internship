@@ -8,7 +8,7 @@ const AuthorItems = ({ items, authorImage, authorId }) => {
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
-          {items && items.map((item, index) => (
+          {items && items.map((item) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
@@ -35,7 +35,7 @@ const AuthorItems = ({ items, authorImage, authorId }) => {
                       </div>
                     </div>
                   </div>
-                  <Link to={`/item-details/${items.nftId}`}>
+                  <Link to={`/item-details/${item.nftId}`}>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
